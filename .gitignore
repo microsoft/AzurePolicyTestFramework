@@ -1,0 +1,7 @@
+.terraform
+*.tfstate*
+*.tfplan
+.terraform.lock.hcl
+
+.idea
+.vscode
