@@ -1,0 +1,25 @@
+name: Loadbalancer Naming
+cases:
+- variables: 
+  - key: prefix
+    value: ilb-
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: lb
+  wantErr: true
+- variables:
+  - key: prefix
+    value: plb-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: ilb-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: lb-
+  wantErr: false
+terraformDir: loadbalancer-naming
+errorMessage: Error Creating/Updating Load Balancer
+errorCode: "Code=\"RequestDisallowedByPolicy\""

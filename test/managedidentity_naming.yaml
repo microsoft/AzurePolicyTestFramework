@@ -1,0 +1,21 @@
+name: Managed Identity Naming
+cases:
+- variables: 
+  - key: prefix
+    value: im
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: mi
+  wantErr: true
+- variables:
+  - key: prefix
+    value: im-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: mi-
+  wantErr: false
+terraformDir: managedidentity-naming
+errorMessage: Error Creating/Updating User Assigned Identity
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

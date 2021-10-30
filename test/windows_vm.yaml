@@ -1,0 +1,75 @@
+name: Deploy Windows VM
+cases:
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsServer
+      offer: WindowsServer
+      sku: 2019-Datacenter
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsServer
+      offer: WindowsServer
+      sku: 2016-Datacenter
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsServer
+      offer: WindowsServer
+      sku: 2012-Datacenter
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsDesktop
+      offer: Windows-7
+      sku: win7-enterprise
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsDesktop
+      offer: Windows-10
+      sku: 20h2-pro
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: MicrosoftWindowsDesktop
+      offer: Windows-10
+      sku: rs1-enterprise
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: true
+- variables:
+  - key: source_image_reference
+    value: 
+      publisher: OpenLogic
+      offer: CentOS
+      sku: 8_2
+      version: latest
+  - key: use_scale_set
+    value: false
+  wantErr: false
+terraformDir: windows-vm
+errorMessage: creating Windows Virtual Machine
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

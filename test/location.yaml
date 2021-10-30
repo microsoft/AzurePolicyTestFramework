@@ -1,0 +1,30 @@
+
+name: Location
+cases:
+- variables:
+  - key: location
+    value: westeurope
+  wantErr: true
+- variables:
+  - key: location
+    value: westus
+  wantErr: true
+- variables:
+  - key: location
+    value: uksouth
+  wantErr: true
+- variables:
+  - key: location
+    value: francecentral
+  wantErr: true
+- variables:
+  - key: location
+    value: northeurope
+  wantErr: false
+- variables:
+  - key: location
+    value: eastus2
+  wantErr: false
+terraformDir: location
+errorMessage: Error Creating/Updating Virtual Network
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

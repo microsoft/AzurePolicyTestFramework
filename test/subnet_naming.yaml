@@ -1,0 +1,21 @@
+name: Subnet Naming
+cases:
+- variables:
+  - key: prefix
+    value: snet
+  wantErr: true
+- variables:
+  - key: prefix
+    value: abc
+  wantErr: true
+- variables:
+  - key: prefix
+    value: abc-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: snet-
+  wantErr: false
+terraformDir: subnet-naming
+errorMessage: Error Creating/Updating Subnet
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

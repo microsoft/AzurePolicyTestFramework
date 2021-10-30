@@ -1,0 +1,29 @@
+name: VMSS Naming
+cases:
+- variables:
+  - key: prefix
+    value: vm-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: vms-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: vmss
+  wantErr: true
+- variables:
+  - key: prefix
+    value: aze-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: vmss-
+  wantErr: false
+- variables:
+  - key: prefix
+    value: VmSs-
+  wantErr: false
+terraformDir: vmss-naming
+errorMessage: Error creating Linux Virtual Machine Scale Set
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

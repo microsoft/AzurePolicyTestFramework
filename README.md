@@ -2,11 +2,40 @@
 
 This repository is a command line tool for testing Azure Policies.
 
-This repository is organized as follow:
+## Usage
 
-- custom_policies : contains 1 folder (1 [terraform Module](https://www.terraform.io/docs/configuration/modules.html)) per custom Azure Policy. 
-- prod_policies : this folder contains the terraform configuration applied on Azure environments to match security requirements.
-- test : for each custom Azure Policy, automated tests are located here.
+For each test case, the following directory structure must be created:
+
+```txt
+Test name
+| setup
+| | *.tf files to setup the policy
+| *.tf files to run test cases
+```
+
+Additionally, a `.yaml` configuration file must describe the test as following:
+
+```yaml
+name: Name of the test
+cases:
+- variables:
+  - key: variable name in TF
+    value: val
+  wantErr: true
+- variables:
+  - key: variable name in TF
+    value: val2
+  wantErr: false
+terraformDir: relative path to the folder structure described above
+errorMessage: Error message from Azure (ex 'Error creating Network Interface')
+errorCode: Error code from Azure (ex 'Error Code=\"RequestDisallowedByPolicy\"')
+```
+
+To run from the source code:
+
+```bash
+go run ./cmd/policyTester/ -config ./test/ -test.v
+```
 
 ## About Azure Policies
 

@@ -1,0 +1,21 @@
+name: App Gateway Naming
+cases:
+- variables: 
+  - key: prefix
+    value: wga-
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: agw
+  wantErr: true
+- variables:
+  - key: prefix
+    value: awg-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: agw-
+  wantErr: false
+terraformDir: appgateway-naming
+errorMessage: Error Creating/Updating Application Gateway
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

@@ -1,0 +1,21 @@
+name: Application Security Group Naming
+cases:
+- variables: 
+  - key: prefix
+    value: gsa-
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: aze
+  wantErr: true
+- variables:
+  - key: prefix
+    value: ns-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: asg-
+  wantErr: false
+terraformDir: applicationsecuritygroup-naming
+errorMessage: Error creating Application Security Group
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

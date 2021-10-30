@@ -1,0 +1,21 @@
+name: VNET Naming
+cases:
+- variables:
+  - key: prefix
+    value: vnet
+  wantErr: true
+- variables:
+  - key: prefix
+    value: abc
+  wantErr: true
+- variables:
+  - key: prefix
+    value: abc-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: vnet-
+  wantErr: false
+terraformDir: vnet-naming
+errorMessage: Error Creating/Updating Virtual Network
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

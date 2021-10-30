@@ -1,0 +1,21 @@
+name: Network Security Group Naming
+cases:
+- variables: 
+  - key: prefix
+    value: gsn-
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: abc
+  wantErr: true
+- variables:
+  - key: prefix
+    value: abc-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: nsg-
+  wantErr: false
+terraformDir: networksecuritygroup-naming
+errorMessage: Error creating/updating NSG
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

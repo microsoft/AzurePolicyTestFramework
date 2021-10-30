@@ -1,0 +1,21 @@
+name: Disk Encryption Set Naming
+cases:
+- variables: 
+  - key: prefix
+    value: sed-
+  wantErr: true
+- variables: 
+  - key: prefix
+    value: sed
+  wantErr: true
+- variables:
+  - key: prefix
+    value: se-
+  wantErr: true
+- variables:
+  - key: prefix
+    value: des-
+  wantErr: false
+terraformDir: diskencryptionset-naming
+errorMessage: Error creating Disk Encryption Set
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""

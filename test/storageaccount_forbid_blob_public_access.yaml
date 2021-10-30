@@ -1,0 +1,13 @@
+name: Storage Account Forbid Public Access
+cases:
+- variables: 
+  - key: blob_access
+    value: true
+  wantErr: true
+- variables: 
+  - key: blob_access
+    value: false
+  wantErr: false
+terraformDir: storageaccount-forbid-blob-public-access
+errorMessage: Error creating Azure Storage Account
+errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
