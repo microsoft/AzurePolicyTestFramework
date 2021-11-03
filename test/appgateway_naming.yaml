@@ -17,5 +17,5 @@ cases:
     value: agw-
   wantErr: false
 terraformDir: appgateway-naming
-errorMessage: Error Creating/Updating Application Gateway
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: Creating/Updating Application Gateway
+errorCode: "Code=\"RequestDisallowedByPolicy\""

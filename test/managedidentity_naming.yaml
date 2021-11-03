@@ -17,5 +17,5 @@ cases:
     value: mi-
   wantErr: false
 terraformDir: managedidentity-naming
-errorMessage: Error Creating/Updating User Assigned Identity
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating/updating User Assigned Identity
+errorCode: "Code=\"RequestDisallowedByPolicy\""

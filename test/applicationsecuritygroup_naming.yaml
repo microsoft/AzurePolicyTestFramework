@@ -17,5 +17,5 @@ cases:
     value: asg-
   wantErr: false
 terraformDir: applicationsecuritygroup-naming
-errorMessage: Error creating Application Security Group
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Application Security Group
+errorCode: "Code=\"RequestDisallowedByPolicy\""

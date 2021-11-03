@@ -25,5 +25,5 @@ cases:
     value: VmSs-
   wantErr: false
 terraformDir: vmss-naming
-errorMessage: Error creating Linux Virtual Machine Scale Set
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Linux Virtual Machine Scale Set
+errorCode: "Code=\"RequestDisallowedByPolicy\""

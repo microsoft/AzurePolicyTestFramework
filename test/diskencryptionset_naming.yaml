@@ -17,5 +17,5 @@ cases:
     value: des-
   wantErr: false
 terraformDir: diskencryptionset-naming
-errorMessage: Error creating Disk Encryption Set
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Disk Encryption Set
+errorCode: "Code=\"RequestDisallowedByPolicy\""

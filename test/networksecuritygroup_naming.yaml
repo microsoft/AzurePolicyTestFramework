@@ -17,5 +17,5 @@ cases:
     value: nsg-
   wantErr: false
 terraformDir: networksecuritygroup-naming
-errorMessage: Error creating/updating NSG
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating/updating NSG
+errorCode: "Code=\"RequestDisallowedByPolicy\""

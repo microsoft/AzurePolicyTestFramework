@@ -17,5 +17,5 @@ cases:
     value: nic-
   wantErr: false
 terraformDir: networkinterface-naming
-errorMessage: Error creating Network Interface
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Network Interface
+errorCode: "Code=\"RequestDisallowedByPolicy\""

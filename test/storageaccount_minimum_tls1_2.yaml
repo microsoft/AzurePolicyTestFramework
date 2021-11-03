@@ -13,5 +13,5 @@ cases:
     value: TLS1_2
   wantErr: false
 terraformDir: storageaccount-minimum-tls1-2
-errorMessage: Error creating Azure Storage Account
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Azure Storage Account
+errorCode: "Code=\"RequestDisallowedByPolicy\""

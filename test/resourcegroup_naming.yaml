@@ -17,5 +17,5 @@ cases:
     value: rg-
   wantErr: false
 terraformDir: resourcegroup-naming
-errorMessage: Error creating Resource Group
+errorMessage: creating Resource Group
 errorCode: "Code=\"RequestDisallowedByPolicy\""

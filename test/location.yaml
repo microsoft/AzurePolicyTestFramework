@@ -26,5 +26,5 @@ cases:
     value: eastus2
   wantErr: false
 terraformDir: location
-errorMessage: Error Creating/Updating Virtual Network
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: Creating/Updating Virtual Network
+errorCode: "Code=\"RequestDisallowedByPolicy\""

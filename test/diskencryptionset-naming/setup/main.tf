@@ -1,10 +1,24 @@
-provider "azurerm" {
-  version = "=2.39.0"
-  features {}
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.63.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0.0"
+    }
+  }
 }
 
-provider "random" {
-  version = "=3.0.0"
+provider "azurerm" {
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = false
+      recover_soft_deleted_key_vaults = false
+    }
+  }
 }
 
 data "azurerm_client_config" "current" {}
@@ -46,8 +60,8 @@ resource "azurerm_key_vault" "test" {
   sku_name                    = "standard"
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   enabled_for_disk_encryption = true
-  soft_delete_enabled         = true
-  purge_protection_enabled    = true
+  soft_delete_enabled         = false
+  purge_protection_enabled    = true # required
 }
 
 resource "azurerm_key_vault_access_policy" "pipeline-user" {

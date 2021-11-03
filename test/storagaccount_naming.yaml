@@ -17,5 +17,5 @@ cases:
     value: sa
   wantErr: false
 terraformDir: storageaccount-naming
-errorMessage: Error creating Azure Storage Account
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating Azure Storage Account
+errorCode: "Code=\"RequestDisallowedByPolicy\""

@@ -26,4 +26,4 @@ cases:
   wantErr: false
 terraformDir: vm-naming
 errorMessage: creating Linux Virtual Machine
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorCode: "Code=\"RequestDisallowedByPolicy\""

@@ -17,5 +17,5 @@ cases:
     value: snet-
   wantErr: false
 terraformDir: subnet-naming
-errorMessage: Error Creating/Updating Subnet
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating/updating Subnet
+errorCode: "Code=\"RequestDisallowedByPolicy\""

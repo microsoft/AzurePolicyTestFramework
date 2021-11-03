@@ -17,5 +17,5 @@ cases:
     value: vnet-
   wantErr: false
 terraformDir: vnet-naming
-errorMessage: Error Creating/Updating Virtual Network
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorMessage: creating/updating Virtual Network
+errorCode: "Code=\"RequestDisallowedByPolicy\""

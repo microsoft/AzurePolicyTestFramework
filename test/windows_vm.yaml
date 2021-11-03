@@ -1,75 +1,89 @@
 name: Deploy Windows VM
 cases:
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsServer
-      offer: WindowsServer
-      sku: 2019-Datacenter
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2019-Datacenter
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsServer
-      offer: WindowsServer
-      sku: 2016-Datacenter
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2016-Datacenter
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsServer
-      offer: WindowsServer
-      sku: 2012-Datacenter
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2012-Datacenter
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsDesktop
-      offer: Windows-7
-      sku: win7-enterprise
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-7
+  - key: image_sku
+    value: win7-enterprise
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsDesktop
-      offer: Windows-10
-      sku: 20h2-pro
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-10
+  - key: image_sku
+    value: 20h2-pro
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: MicrosoftWindowsDesktop
-      offer: Windows-10
-      sku: rs1-enterprise
-      version: latest
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-10
+  - key: image_sku
+    value: rs1-enterprise
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: true
 - variables:
-  - key: source_image_reference
-    value: 
-      publisher: OpenLogic
-      offer: CentOS
-      sku: 8_2
-      version: latest
+  - key: image_publisher
+    value: OpenLogic
+  - key: image_offer
+    value: CentOS
+  - key: image_sku
+    value: "8_2"
+  - key: image_version
+    value: latest
   - key: use_scale_set
     value: false
   wantErr: false
 terraformDir: windows-vm
 errorMessage: creating Windows Virtual Machine
-errorCode: "Error: Code=\"RequestDisallowedByPolicy\""
+errorCode: "Code=\"RequestDisallowedByPolicy\""
