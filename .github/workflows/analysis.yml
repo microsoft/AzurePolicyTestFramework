@@ -35,8 +35,6 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
         languages: go
-    - name: Download modules
-      run: go mod download
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
     - name: Perform CodeQL Analysis
