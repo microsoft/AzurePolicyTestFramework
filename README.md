@@ -7,10 +7,10 @@ This repository is a command line tool for testing Azure Policies.
 For each test case, the following directory structure must be created:
 
 ```txt
-Test name
-| setup
-| | *.tf files to setup the policy
-| *.tf files to run test cases
++-- your_test_name
+|   +-- setup
+|   |   +-- terraform files to setup the policy
+|   +-- terraform files for test cases
 ```
 
 Additionally, a `.yaml` configuration file must describe the test as following:
@@ -35,6 +35,12 @@ To run from the source code:
 
 ```bash
 go run ./cmd/policyTester/ -config ./test/ -test.v
+```
+
+Note: any args from the `go test` command are available for use. For instance:
+
+```bash
+go run ./cmd/policyTester/ -config ./test/ -test.v -test.parallel=10 -test.run Location
 ```
 
 ## About Azure Policies

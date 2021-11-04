@@ -63,6 +63,5 @@ func RunGoTest(configPath string) (int, error) {
 	}
 
 	t := new(T)
-
 	return testing.MainStart(t, tests, []testing.InternalBenchmark{}, []testing.InternalExample{}).Run(), nil
 }

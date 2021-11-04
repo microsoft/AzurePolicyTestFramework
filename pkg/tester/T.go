@@ -1,11 +1,18 @@
 package tester
 
-import "io"
+import (
+	"io"
+	"regexp"
+)
 
 type T struct{}
 
 func (t *T) MatchString(pat, str string) (bool, error) {
-	return true, nil
+	matchRe, err := regexp.Compile(pat)
+	if err != nil {
+		return false, err
+	}
+	return matchRe.MatchString(str), nil
 }
 
 func (t *T) StartCPUProfile(io.Writer) error {
