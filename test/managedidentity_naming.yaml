@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: im
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: mi
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: im-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: mi-
-  wantErr: false
+  errorExpected: false
 terraformDir: managedidentity-naming
 errorMessage: creating/updating User Assigned Identity
 errorCode: "Code=\"RequestDisallowedByPolicy\""

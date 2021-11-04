@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: gsn-
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: abc
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: nsg-
-  wantErr: false
+  errorExpected: false
 terraformDir: networksecuritygroup-naming
 errorMessage: creating/updating NSG
 errorCode: "Code=\"RequestDisallowedByPolicy\""

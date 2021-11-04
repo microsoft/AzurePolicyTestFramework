@@ -3,19 +3,19 @@ cases:
 - variables:
   - key: prefix
     value: asa
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: as
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: sa
-  wantErr: false
+  errorExpected: false
 terraformDir: storageaccount-naming
 errorMessage: creating Azure Storage Account
 errorCode: "Code=\"RequestDisallowedByPolicy\""

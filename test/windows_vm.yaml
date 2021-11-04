@@ -11,7 +11,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: MicrosoftWindowsServer
@@ -23,7 +23,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: MicrosoftWindowsServer
@@ -35,7 +35,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: MicrosoftWindowsDesktop
@@ -47,7 +47,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: MicrosoftWindowsDesktop
@@ -59,7 +59,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: MicrosoftWindowsDesktop
@@ -71,7 +71,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: image_publisher
     value: OpenLogic
@@ -83,7 +83,7 @@ cases:
     value: latest
   - key: use_scale_set
     value: false
-  wantErr: false
+  errorExpected: false
 terraformDir: windows-vm
 errorMessage: creating Windows Virtual Machine
 errorCode: "Code=\"RequestDisallowedByPolicy\""

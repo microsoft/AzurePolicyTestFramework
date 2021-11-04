@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: gsa-
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: aze
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: ns-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: asg-
-  wantErr: false
+  errorExpected: false
 terraformDir: applicationsecuritygroup-naming
 errorMessage: creating Application Security Group
 errorCode: "Code=\"RequestDisallowedByPolicy\""

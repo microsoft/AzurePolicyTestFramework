@@ -1,0 +1,39 @@
+name: 'Analysis'
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  lint:
+    name: Check linter
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Terraform fmt
+      run: terraform fmt -check -recursive
+    - name: Golang lint
+      uses: golangci/golangci-lint-action@v2
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: [go]
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1

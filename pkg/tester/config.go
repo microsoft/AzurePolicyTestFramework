@@ -9,7 +9,7 @@ type TestConfig struct {
 }
 
 type PolicyTestCase struct {
-	ErrorExpected bool               `yaml:"wantErr"`
+	ErrorExpected bool               `yaml:"errorExpected"`
 	Variables     []TestCaseVariable `yaml:"variables"`
 }
 

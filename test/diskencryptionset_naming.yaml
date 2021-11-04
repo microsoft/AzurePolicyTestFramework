@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: sed-
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: sed
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: se-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: des-
-  wantErr: false
+  errorExpected: false
 terraformDir: diskencryptionset-naming
 errorMessage: creating Disk Encryption Set
 errorCode: "Code=\"RequestDisallowedByPolicy\""

@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: gr-
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: gr
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: rg
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: rg-
-  wantErr: false
+  errorExpected: false
 terraformDir: resourcegroup-naming
 errorMessage: creating Resource Group
 errorCode: "Code=\"RequestDisallowedByPolicy\""

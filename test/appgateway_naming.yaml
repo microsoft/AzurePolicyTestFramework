@@ -3,19 +3,19 @@ cases:
 - variables: 
   - key: prefix
     value: wga-
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: agw
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: awg-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: agw-
-  wantErr: false
+  errorExpected: false
 terraformDir: appgateway-naming
 errorMessage: Creating/Updating Application Gateway
 errorCode: "Code=\"RequestDisallowedByPolicy\""

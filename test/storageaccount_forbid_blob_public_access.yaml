@@ -3,11 +3,11 @@ cases:
 - variables: 
   - key: blob_access
     value: true
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: blob_access
     value: false
-  wantErr: false
+  errorExpected: false
 terraformDir: storageaccount-forbid-blob-public-access
 errorMessage: creating Azure Storage Account
 errorCode: "Code=\"RequestDisallowedByPolicy\""

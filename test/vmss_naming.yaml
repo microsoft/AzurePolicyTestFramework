@@ -3,27 +3,27 @@ cases:
 - variables:
   - key: prefix
     value: vm-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: vms-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: vmss
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: aze-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: vmss-
-  wantErr: false
+  errorExpected: false
 - variables:
   - key: prefix
     value: VmSs-
-  wantErr: false
+  errorExpected: false
 terraformDir: vmss-naming
 errorMessage: creating Linux Virtual Machine Scale Set
 errorCode: "Code=\"RequestDisallowedByPolicy\""

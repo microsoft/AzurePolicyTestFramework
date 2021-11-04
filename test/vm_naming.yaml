@@ -3,27 +3,27 @@ cases:
 - variables:
   - key: prefix
     value: vm
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: vvm-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: vm-
-  wantErr: false
+  errorExpected: false
 - variables:
   - key: prefix
     value: VM- # Azure policy "like/notLike" operator is case insensitive
-  wantErr: false
+  errorExpected: false
 terraformDir: vm-naming
 errorMessage: creating Linux Virtual Machine
 errorCode: "Code=\"RequestDisallowedByPolicy\""

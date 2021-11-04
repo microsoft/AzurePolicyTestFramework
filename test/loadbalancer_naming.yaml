@@ -3,23 +3,23 @@ cases:
 - variables: 
   - key: prefix
     value: ilb
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: prefix
     value: lb
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: plb-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: ilb-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: lb-
-  wantErr: false
+  errorExpected: false
 terraformDir: loadbalancer-naming
 errorMessage: Creating/Updating Load Balancer
 errorCode: "Code=\"RequestDisallowedByPolicy\""

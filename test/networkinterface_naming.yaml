@@ -3,19 +3,19 @@ cases:
 - variables:
   - key: prefix
     value: cin
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: cin-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: nic-
-  wantErr: false
+  errorExpected: false
 terraformDir: networkinterface-naming
 errorMessage: creating Network Interface
 errorCode: "Code=\"RequestDisallowedByPolicy\""

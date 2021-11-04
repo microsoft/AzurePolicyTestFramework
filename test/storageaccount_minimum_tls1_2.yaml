@@ -3,15 +3,15 @@ cases:
 - variables: 
   - key: tls_version
     value: TLS1_0
-  wantErr: true
+  errorExpected: true
 - variables: 
   - key: tls_version
     value: TLS1_1
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: tls_version
     value: TLS1_2
-  wantErr: false
+  errorExpected: false
 terraformDir: storageaccount-minimum-tls1-2
 errorMessage: creating Azure Storage Account
 errorCode: "Code=\"RequestDisallowedByPolicy\""

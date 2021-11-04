@@ -3,19 +3,19 @@ cases:
 - variables:
   - key: prefix
     value: snet
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: abc-
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: prefix
     value: snet-
-  wantErr: false
+  errorExpected: false
 terraformDir: subnet-naming
 errorMessage: creating/updating Subnet
 errorCode: "Code=\"RequestDisallowedByPolicy\""

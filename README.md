@@ -21,11 +21,11 @@ cases:
 - variables:
   - key: variable name in TF
     value: val
-  wantErr: true
+  errorExpected: true
 - variables:
   - key: variable name in TF
     value: val2
-  wantErr: false
+  errorExpected: false
 terraformDir: relative path to the folder structure described above
 errorMessage: Error message from Azure (ex 'Error creating Network Interface')
 errorCode: Error code from Azure (ex 'Error Code=\"RequestDisallowedByPolicy\"')
