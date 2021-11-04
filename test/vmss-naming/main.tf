@@ -16,7 +16,7 @@ provider "azurerm" {
   features {}
 }
 
-variable "resource_group_name" { type = string}
+variable "resource_group_name" { type = string }
 variable "prefix" { type = string }
 
 data "azurerm_resource_group" "test" {

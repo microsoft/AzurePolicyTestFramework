@@ -17,7 +17,7 @@ provider "azurerm" {
 }
 
 variable "prefix" { type = string }
-variable "resource_group_name" { type = string}
+variable "resource_group_name" { type = string }
 variable "subnet_id" {}
 
 resource "random_string" "suffix" {
