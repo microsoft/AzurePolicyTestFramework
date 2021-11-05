@@ -1,14 +1,23 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.63.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "=2.39.0"
   features {}
 }
 
-provider "random" {
-  version = "=3.0.0"
-}
-
 variable "tls_version" {}
-variable "resource_group_name" {}
+variable "resource_group_name" { type = string }
 
 resource "random_string" "suffix" {
   length  = 5

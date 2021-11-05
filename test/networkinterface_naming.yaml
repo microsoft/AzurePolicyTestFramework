@@ -1,0 +1,21 @@
+name: Network Interface Naming
+cases:
+- variables:
+  - key: prefix
+    value: cin
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: cin-
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: abc
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: nic-
+  errorExpected: false
+terraformDir: networkinterface-naming
+errorMessage: creating Network Interface
+errorCode: "Code=\"RequestDisallowedByPolicy\""

@@ -1,27 +1,32 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.63.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "=2.39.0"
   features {}
 }
 
-provider "random" {
-  version = "=3.0.0"
-}
-
-variable "resource_group_name" {}
+variable "resource_group_name" { type = string }
 variable "use_scale_set" { type = bool }
-variable "source_image_reference" {
-  type = object({
-    publisher = string
-    offer     = string
-    sku       = string
-    version   = string
-  })
-}
+variable "image_publisher" { type = string }
+variable "image_offer" { type = string }
+variable "image_sku" { type = string }
+variable "image_version" { type = string }
 
 locals {
-  hasWindowsInOffer  = length(regexall("Windows*", var.source_image_reference.offer)) > 0
+  hasWindowsInOffer  = length(regexall("Windows*", var.image_offer)) > 0
   is_windows         = local.hasWindowsInOffer
-  is_linux           = local.hasWindowsInOffer == false
+  is_linux           = !local.is_windows
   windows_vm_count   = var.use_scale_set == false && local.is_windows ? 1 : 0
   windows_vmss_count = var.use_scale_set && local.is_windows ? 1 : 0
   linux_vm_count     = var.use_scale_set == false && local.is_linux ? 1 : 0
@@ -83,10 +88,10 @@ resource "azurerm_windows_virtual_machine" "test" {
   admin_username = "automated-test"
 
   source_image_reference {
-    offer     = var.source_image_reference.offer
-    publisher = var.source_image_reference.publisher
-    sku       = var.source_image_reference.sku
-    version   = var.source_image_reference.version
+    offer     = var.image_offer
+    publisher = var.image_publisher
+    sku       = var.image_sku
+    version   = var.image_version
   }
 }
 
@@ -117,10 +122,10 @@ resource "azurerm_windows_virtual_machine_scale_set" "test" {
   }
 
   source_image_reference {
-    offer     = var.source_image_reference.offer
-    publisher = var.source_image_reference.publisher
-    sku       = var.source_image_reference.sku
-    version   = var.source_image_reference.version
+    offer     = var.image_offer
+    publisher = var.image_publisher
+    sku       = var.image_sku
+    version   = var.image_version
   }
 }
 
@@ -142,10 +147,10 @@ resource "azurerm_linux_virtual_machine" "test" {
   }
 
   source_image_reference {
-    offer     = var.source_image_reference.offer
-    publisher = var.source_image_reference.publisher
-    sku       = var.source_image_reference.sku
-    version   = var.source_image_reference.version
+    offer     = var.image_offer
+    publisher = var.image_publisher
+    sku       = var.image_sku
+    version   = var.image_version
   }
 }
 
@@ -177,9 +182,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "test" {
   }
 
   source_image_reference {
-    offer     = var.source_image_reference.offer
-    publisher = var.source_image_reference.publisher
-    sku       = var.source_image_reference.sku
-    version   = var.source_image_reference.version
+    offer     = var.image_offer
+    publisher = var.image_publisher
+    sku       = var.image_sku
+    version   = var.image_version
   }
 }

@@ -1,0 +1,21 @@
+name: Storage Account Naming
+cases:
+- variables:
+  - key: prefix
+    value: asa
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: abc
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: as
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: sa
+  errorExpected: false
+terraformDir: storageaccount-naming
+errorMessage: creating Azure Storage Account
+errorCode: "Code=\"RequestDisallowedByPolicy\""

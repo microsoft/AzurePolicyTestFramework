@@ -1,15 +1,24 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.63.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "=2.39.0"
   features {}
 }
 
-provider "random" {
-  version = "=3.0.0"
-}
-
-variable "prefix" {}
-variable "resource_group_name" {}
-variable "keyvault_key_id" {}
+variable "prefix" { type = string }
+variable "resource_group_name" { type = string }
+variable "keyvault_key_id" { type = string }
 
 resource "random_string" "suffix" {
   length  = 5

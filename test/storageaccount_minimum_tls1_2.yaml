@@ -1,0 +1,17 @@
+name: Storage Account Min TLS Version
+cases:
+- variables: 
+  - key: tls_version
+    value: TLS1_0
+  errorExpected: true
+- variables: 
+  - key: tls_version
+    value: TLS1_1
+  errorExpected: true
+- variables:
+  - key: tls_version
+    value: TLS1_2
+  errorExpected: false
+terraformDir: storageaccount-minimum-tls1-2
+errorMessage: creating Azure Storage Account
+errorCode: "Code=\"RequestDisallowedByPolicy\""

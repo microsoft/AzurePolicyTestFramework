@@ -1,0 +1,89 @@
+name: Deploy Windows VM
+cases:
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2019-Datacenter
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2016-Datacenter
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsServer
+  - key: image_offer
+    value: WindowsServer
+  - key: image_sku
+    value: 2012-Datacenter
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-7
+  - key: image_sku
+    value: win7-enterprise
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-10
+  - key: image_sku
+    value: 20h2-pro
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: MicrosoftWindowsDesktop
+  - key: image_offer
+    value: Windows-10
+  - key: image_sku
+    value: rs1-enterprise
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: true
+- variables:
+  - key: image_publisher
+    value: OpenLogic
+  - key: image_offer
+    value: CentOS
+  - key: image_sku
+    value: "8_2"
+  - key: image_version
+    value: latest
+  - key: use_scale_set
+    value: false
+  errorExpected: false
+terraformDir: windows-vm
+errorMessage: creating Windows Virtual Machine
+errorCode: "Code=\"RequestDisallowedByPolicy\""
