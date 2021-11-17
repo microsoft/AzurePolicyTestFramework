@@ -1,0 +1,64 @@
+{
+  "properties": {
+    "displayName": "Prevent from bad location",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "",
+    "metadata": {
+      "createdBy": "f3a7783b-3b3b-4568-9b0f-03775e509e8e",
+      "createdOn": "2021-11-17T09:10:14.99062Z",
+      "updatedBy": null,
+      "updatedOn": null
+    },
+    "parameters": {
+      "allowedLocations": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of allowed locations for resources.",
+          "displayName": "Allowed locations",
+          "strongType": "location"
+        },
+        "defaultValue": [
+          "North Europe",
+          "---",
+          "East US 2"
+        ]
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "description": "Enable or disable or change the execution of this policy",
+          "displayName": "Effect"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "location",
+          "in": "[parameters('allowedLocations')]"
+        }
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  },
+  "id": "/subscriptions/cdd50b30-b156-4574-b9dd-57ec4a587268/providers/Microsoft.Authorization/policyDefinitions/Prevent from bad location",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "name": "Prevent from bad location",
+  "systemData": {
+    "createdBy": "user@domain.com",
+    "createdByType": "User",
+    "createdAt": "2021-11-17T09:10:14.9450521Z",
+    "lastModifiedBy": "user@domain.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2021-11-17T09:10:14.9450521Z"
+  }
+}
