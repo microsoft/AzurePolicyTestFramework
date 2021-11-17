@@ -1,45 +1,24 @@
-resource "azurerm_policy_definition" "Prevent_from_bad_location" {
-  name         = "Prevent from bad location${var.suffix}"
-  policy_type  = "Custom"
-  mode         = "All"
-  display_name = "Prevent from bad location${var.suffix}"
+locals {
+  file         = jsondecode(file("${path.module}/policy.json"))
+  name         = "${local.file.name}${var.suffix}"
+  policy_type  = local.file.properties.policyType
+  mode         = local.file.properties.mode
+  display_name = "${local.file.properties.displayName}${var.suffix}"
+  description  = local.file.properties.description
+  rule         = jsonencode(local.file.properties.policyRule)
+  parameters   = jsonencode(local.file.properties.parameters)
+  metadata     = jsonencode(local.file.properties.metadata)
+}
 
-  policy_rule = jsonencode(
-    {
-      "if" : {
-        "not" : {
-          "field" : "location",
-          "in" : "[parameters('allowedLocations')]"
-        }
-      },
-      "then" : {
-        "effect" : "[parameters('effect')]"
-      }
-  })
+resource "azurerm_policy_definition" "policy" {
+  name         = local.name
+  policy_type  = local.policy_type
+  mode         = local.mode
+  display_name = local.display_name
+  policy_rule  = local.rule
+  parameters   = local.parameters
+}
 
-  parameters = jsonencode(
-    {
-      "allowedLocations" : {
-        "type" : "Array",
-        "defaultValue" : ["North Europe", "---", "East US 2"],
-        "metadata" : {
-          "description" : "The list of allowed locations for resources.",
-          "displayName" : "Allowed locations",
-          "strongType" : "location"
-        }
-      },
-      "effect" : {
-        "type" : "String",
-        "metadata" : {
-          "displayName" : "Effect",
-          "description" : "Enable or disable or change the execution of this policy"
-        },
-        "allowedValues" : [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
-        "defaultValue" : "Audit"
-      }
-  })
+output "policy_id" {
+  value = azurerm_policy_definition.policy.id
 }

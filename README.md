@@ -13,6 +13,9 @@ For each test case, the following directory structure must be created:
 |   +-- terraform files for test cases
 ```
 
+Note: the definition of the policy and the content of the terraform test code is up to you. The folders `policy_defintions` and `test` aim to be used as examples.
+You may define policies in Json (see `policy_defintions/location`), in TF (any other definition), in ARM template or whatever suits your need as long as you are able to wrap it in Terraform.
+
 Additionally, a `.yaml` configuration file must describe the test as following:
 
 ```yaml
