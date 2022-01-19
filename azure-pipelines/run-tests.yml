@@ -55,10 +55,12 @@ steps:
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
+        set -eu
+        subscriptionId=$(az account show --query id -o tsv)
         export ARM_CLIENT_ID=$servicePrincipalId
         export ARM_CLIENT_SECRET=$servicePrincipalKey
         export ARM_TENANT_ID=$tenantId
-        export ARM_SUBSCRIPTION_ID=$SUBSCRIPTIONID
+        export ARM_SUBSCRIPTION_ID=$subscriptionId
         export PATH=$PATH:`go env GOPATH`/bin
         go run ./cmd/policyTester/ -config ./test/ -test.v -test.parallel=10 ${{ parameters.goTestArgs }} 2>&1 | tee testrun.log
         cat testrun.log | go-junit-report > report.xml
