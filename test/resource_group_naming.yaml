@@ -1,0 +1,21 @@
+name: Resource Group Naming
+cases:
+- variables: 
+  - key: prefix
+    value: gr-
+  errorExpected: true
+- variables: 
+  - key: prefix
+    value: gr
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: rg
+  errorExpected: true
+- variables:
+  - key: prefix
+    value: rg-
+  errorExpected: false
+terraformDir: resource-group-naming
+errorMessage: creating Resource Group
+errorCode: "Code=\"RequestDisallowedByPolicy\""

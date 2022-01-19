@@ -23,14 +23,24 @@ resource "random_string" "suffix" {
   special = false
 }
 
-module "policy" {
-  source = "../../../policy_definitions/location"
-  suffix = random_string.suffix.result
+locals {
+  file = jsondecode(file("${path.module}/../../../policy_definitions/location.json"))
+}
+
+resource "azurerm_policy_definition" "policy" {
+  name         = "${local.file.properties.name} ${random_string.suffix.result}"
+  policy_type  = local.file.properties.policyType
+  mode         = local.file.properties.mode
+  display_name = "${local.file.properties.displayName} ${random_string.suffix.result}"
+  policy_rule  = jsonencode(local.file.properties.policyRule)
+  parameters   = jsonencode(local.file.properties.parameters)
+  description  = local.file.properties.description
+  metadata     = jsonencode(local.file.properties.metadata)
 }
 
 resource "azurerm_policy_assignment" "test" {
-  name                 = "ci-enforce-location-policy-assignment"
-  policy_definition_id = module.policy.policy_id
+  name                 = "assign-location-policy"
+  policy_definition_id = azurerm_policy_definition.policy.id
   scope                = azurerm_resource_group.test.id
 
   parameters = jsonencode(
@@ -43,13 +53,9 @@ resource "azurerm_policy_assignment" "test" {
 
 resource "azurerm_resource_group" "test" {
   location = "northeurope"
-  name     = "rg-ci-policy-location-test-${random_string.suffix.result}"
+  name     = "test-policy-location-${random_string.suffix.result}"
 }
 
 output "resource_group_name" {
   value = azurerm_resource_group.test.name
-}
-
-output "policy_assignment_name" {
-  value = azurerm_policy_assignment.test.name
 }

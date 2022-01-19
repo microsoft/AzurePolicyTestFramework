@@ -16,7 +16,7 @@ provider "azurerm" {
   features {}
 }
 
-variable "blob_access" {}
+variable "allow_blob_public_access" { type = bool }
 variable "resource_group_name" { type = string }
 
 resource "random_string" "suffix" {
@@ -32,5 +32,5 @@ resource "azurerm_storage_account" "test" {
   location                 = "northeurope"
   name                     = "testfba${random_string.suffix.result}"
   resource_group_name      = var.resource_group_name
-  allow_blob_public_access = var.blob_access
+  allow_blob_public_access = var.allow_blob_public_access
 }

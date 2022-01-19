@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "Disable public access on Storage Account",
+    "displayName": "Disable public access on Storage Account",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Ensure that blob public access is not allowed",
+    "metadata": {},
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "description": "The effect determines what happens when the policy rule is evaluated to match",
+          "displayName": "Effect"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "equals": "Microsoft.Storage/storageAccounts",
+            "field": "type"
+          },
+          {
+            "not": {
+              "equals": "false",
+              "field": "Microsoft.Storage/storageAccounts/allowBlobPublicAccess"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

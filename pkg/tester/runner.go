@@ -16,8 +16,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const tfOutputPolicyAssignmentName = "policy_assignment_name"
-
 type testRunner struct {
 	tfExecPath string
 	config     TestConfig
@@ -54,24 +52,18 @@ func (runner *testRunner) Test(t *testing.T) {
 	outputs, err := setup.Output(ctx)
 	require.NoError(t, err, "setup: error running Output command")
 
-	var pan string
-	require.NoErrorf(t, json.Unmarshal(outputs[tfOutputPolicyAssignmentName].Value, &pan), "setup: unmarshall value of %s from the outputs", tfOutputPolicyAssignmentName)
-
 	errorMessagesExpectedParts := []string{
 		runner.config.ErrorMessage,
 		runner.config.ErrorCode,
-		pan,
 	}
 
 	vars := make([]*tfexec.VarOption, 0)
 
 	for key, output := range outputs {
-		if key != tfOutputPolicyAssignmentName {
-			var value string
-			require.NoErrorf(t, json.Unmarshal(output.Value, &value), "setup: unmarshall value of %s from the outputs", key)
+		var value string
+		require.NoErrorf(t, json.Unmarshal(output.Value, &value), "setup: unmarshall value of %s from the outputs", key)
 
-			vars = append(vars, tfexec.Var(fmt.Sprintf("%s=%v", key, value)))
-		}
+		vars = append(vars, tfexec.Var(fmt.Sprintf("%s=%v", key, value)))
 	}
 
 	time.Sleep(30 * time.Minute) // Time for the policy to be active

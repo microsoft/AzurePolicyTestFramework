@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "Prevent Windows VM deployment",
+    "displayName": "Prevent Windows VM deployment",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Ensures that Windows VMs are not allowed",
+    "metadata": {},
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "equals": "Microsoft.Compute/virtualMachineScaleSets",
+                "field": "type"
+              },
+              {
+                "exists": "True",
+                "field": "Microsoft.Compute/virtualMachineScaleSets/virtualMachineProfile.osProfile.windowsConfiguration"
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "equals": "Microsoft.Compute/virtualMachines",
+                "field": "type"
+              },
+              {
+                "exists": "True",
+                "field": "Microsoft.Compute/virtualMachines/osProfile.windowsConfiguration"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
