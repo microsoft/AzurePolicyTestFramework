@@ -13,6 +13,7 @@ import (
 
 	tfFiles "github.com/gruntwork-io/terratest/modules/files"
 	"github.com/hashicorp/terraform-exec/tfexec"
+	"github.com/microsoft/AzurePolicyTestFramework/pkg/tester/testutil"
 	"github.com/stretchr/testify/require"
 )
 
@@ -41,6 +42,7 @@ func (runner *testRunner) Test(t *testing.T) {
 	setup, err := tfexec.NewTerraform(filepath.Join(runner.config.TerraformDir, "setup"), runner.tfExecPath)
 	require.NoError(t, err, "setup: new Terraform object")
 
+	setup.SetLogger(testutil.TestLogger())
 	require.NoErrorf(t, setup.Init(ctx, tfexec.Upgrade(false), tfexec.Reconfigure(true)), "setup: Init command. Directory: %s", setup.WorkingDir())
 
 	t.Cleanup(func() {
@@ -97,6 +99,7 @@ func (runner *testRunner) Test(t *testing.T) {
 			})
 
 			tf, err := tfexec.NewTerraform(tmpDir, runner.tfExecPath)
+			tf.SetLogger(testutil.TestLogger())
 			require.NoError(t, err, "New Terraform object")
 
 			require.NoError(t, tf.Init(ctx, tfexec.Upgrade(false), tfexec.Reconfigure(true)), "Init command")
