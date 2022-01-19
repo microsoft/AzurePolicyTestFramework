@@ -1,0 +1,73 @@
+parameters:
+- name: goTestArgs
+  type: string
+  default: '-test.run Location'
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+pr:
+  autoCancel: false
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: TerraformInstaller@0
+    displayName: "Install Terraform CLI"
+    inputs:
+      terraformVersion: '1.1.0'
+
+  - task: GoTool@0
+    inputs:
+      version: '1.17'
+
+  - task: Go@0
+    inputs:
+      command: 'get'
+      arguments: '-v -u github.com/jstemmer/go-junit-report'
+    displayName: 'Go get go-junit-report'
+
+  - task: Go@0
+    inputs:
+      command: 'get'
+      arguments: '-t -v ./...'
+    displayName: 'Go get'
+
+  - task: Go@0
+    inputs:
+      command: 'custom'
+      customCommand: 'vet'
+      workingDirectory: cmd/policyTester
+      arguments: '-v ./...'
+    displayName: 'Go vet'
+
+  - task: AzureCLI@2
+    displayName: Run tests
+    inputs:
+      azureSubscription: 'policy-testing'
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        export ARM_CLIENT_ID=$servicePrincipalId
+        export ARM_CLIENT_SECRET=$servicePrincipalKey
+        export ARM_TENANT_ID=$tenantId
+        export ARM_SUBSCRIPTION_ID=$SUBSCRIPTIONID
+        export PATH=$PATH:`go env GOPATH`/bin
+        go run ./cmd/policyTester/ -config ./test/ -test.v -test.parallel=10 ${{ parameters.goTestArgs }} 2>&1 | tee testrun.log
+        cat testrun.log | go-junit-report > report.xml
+      addSpnToEnvironment: true
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/report.xml'
+      failTaskOnFailedTests: true
+      testRunTitle: Policies Tests
+    displayName: "Publish Test Results"
