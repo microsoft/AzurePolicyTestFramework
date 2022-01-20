@@ -1,11 +1,11 @@
 name: Storage Account Forbid Public Access
 cases:
 - variables: 
-  - key: blob_access
+  - key: allow_blob_public_access
     value: true
   errorExpected: true
 - variables: 
-  - key: blob_access
+  - key: allow_blob_public_access
     value: false
   errorExpected: false
 terraformDir: storageaccount-forbid-blob-public-access

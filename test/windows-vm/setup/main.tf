@@ -23,26 +23,33 @@ resource "random_string" "suffix" {
   special = false
 }
 
-module "policy" {
-  source = "../../../policy_definitions/windows-vm"
-  suffix = random_string.suffix.result
+locals {
+  file = jsondecode(file("${path.module}/../../../policy_definitions/windows-vm.json"))
 }
 
+resource "azurerm_policy_definition" "policy" {
+  name         = "${local.file.properties.name} ${random_string.suffix.result}"
+  policy_type  = local.file.properties.policyType
+  mode         = local.file.properties.mode
+  display_name = "${local.file.properties.displayName} ${random_string.suffix.result}"
+  policy_rule  = jsonencode(local.file.properties.policyRule)
+  parameters   = jsonencode(local.file.properties.parameters)
+  description  = local.file.properties.description
+  metadata     = jsonencode(local.file.properties.metadata)
+}
+
+
 resource "azurerm_policy_assignment" "test" {
-  name                 = "ci-deny-windows-vm-policy-assignment"
-  policy_definition_id = module.policy.policy_id
+  name                 = "assign-deny-windows-vm-policy"
+  policy_definition_id = azurerm_policy_definition.policy.id
   scope                = azurerm_resource_group.test.id
 }
 
 resource "azurerm_resource_group" "test" {
   location = "northeurope"
-  name     = "rg-ci-deny-windows-vm-policy-test-${random_string.suffix.result}"
+  name     = "test-policy-deny-windows-vm-policy-${random_string.suffix.result}"
 }
 
 output "resource_group_name" {
   value = azurerm_resource_group.test.name
-}
-
-output "policy_assignment_name" {
-  value = azurerm_policy_assignment.test.name
 }

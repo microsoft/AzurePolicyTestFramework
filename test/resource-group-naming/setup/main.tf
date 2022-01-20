@@ -24,7 +24,7 @@ resource "random_string" "suffix" {
 }
 
 locals {
-  file = jsondecode(file("${path.module}/../../../policy_definitions/storage-account-disable-public-access.json"))
+  file = jsondecode(file("${path.module}/../../../policy_definitions/resource-group-naming.json"))
 }
 
 resource "azurerm_policy_definition" "policy" {
@@ -38,10 +38,12 @@ resource "azurerm_policy_definition" "policy" {
   metadata     = jsonencode(local.file.properties.metadata)
 }
 
+data "azurerm_subscription" "current" {}
+
 resource "azurerm_policy_assignment" "test" {
-  name                 = "assign-storageaccount-forbid-blob-public-access"
+  name                 = "assign-resourcegroup-naming-policy"
   policy_definition_id = azurerm_policy_definition.policy.id
-  scope                = azurerm_resource_group.test.id
+  scope                = data.azurerm_subscription.current.id
 
   parameters = jsonencode(
     {
@@ -49,13 +51,4 @@ resource "azurerm_policy_assignment" "test" {
         "value" : "Deny"
       }
   })
-}
-
-resource "azurerm_resource_group" "test" {
-  location = "northeurope"
-  name     = "test-policy-storageaccount-forbid-blob-public-access-${random_string.suffix.result}"
-}
-
-output "resource_group_name" {
-  value = azurerm_resource_group.test.name
 }
