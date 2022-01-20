@@ -1,0 +1,79 @@
+name: 'Release'
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+jobs: 
+  create-release:
+    name: create release
+    runs-on: ubuntu-latest
+    outputs: 
+      upload-url: ${{ steps.create_release.outputs.upload_url }}
+      version: ${{ steps.get_version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
+      - name: "Build Changelog"
+        id: changelog
+        uses: mikepenz/release-changelog-builder-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: new release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: Policy Tester ${{ steps.get_version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  build:
+    name: build tool binaries
+    runs-on: ubuntu-latest
+    needs: 
+      - create-release
+    strategy:
+      matrix:
+        include:
+          - {goos: "linux", goarch: "amd64"}
+          - {goos: "windows", goarch: "amd64"}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17'
+      
+      - name: Build for ${{ matrix.goos }}
+        working-directory: cmd/policyTester
+        run: |
+          export GOARCH=${{ matrix.goarch }}
+          export GOOS=${{ matrix.goos }}
+          go build -o bin/ .
+          zip -r -j bin/policy-tester.${{ needs.create-release.outputs.version }}.${{ matrix.goos }}-${{ matrix.goarch }}.zip bin/
+      
+      - name: upload ${{ matrix.goos }} artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload-url }}
+          asset_path: cmd/policyTester/bin/policy-tester.${{ needs.create-release.outputs.version }}.${{ matrix.goos }}-${{ matrix.goarch }}.zip
+          asset_name: policy-tester.${{ needs.create-release.outputs.version }}.${{ matrix.goos }}-${{ matrix.goarch }}.zip
+          asset_content_type: application/zip
