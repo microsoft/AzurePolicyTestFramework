@@ -22,7 +22,7 @@ resource "random_string" "suffix" {
   upper   = false
   special = false
 }
-# [for file in fileset("", "policy_definitions/*.json") : jsondecode(file(file))]
+
 resource "azurerm_policy_definition" "policy" {
   for_each = { for file in fileset(path.module, "../../../policy_definitions/*.json") : file => jsondecode(file(file)) }
 
