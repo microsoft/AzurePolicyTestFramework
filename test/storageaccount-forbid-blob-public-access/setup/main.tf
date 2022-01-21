@@ -53,7 +53,7 @@ resource "azurerm_policy_assignment" "test" {
 
 resource "azurerm_resource_group" "test" {
   location = "northeurope"
-  name     = "test-policy-storageaccount-forbid-blob-public-access-${random_string.suffix.result}"
+  name     = "rg-test-policy-storageaccount-forbid-blob-public-access-${random_string.suffix.result}"
 }
 
 output "resource_group_name" {

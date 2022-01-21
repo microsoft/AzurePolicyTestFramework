@@ -54,7 +54,7 @@ resource "azurerm_policy_assignment" "test" {
 
 resource "azurerm_resource_group" "test" {
   location = "northeurope"
-  name     = "policy-test-full-${random_string.suffix.result}"
+  name     = "rg-policy-test-full-${random_string.suffix.result}"
 }
 
 output "resource_group_name" {

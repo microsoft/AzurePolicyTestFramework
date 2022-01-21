@@ -47,7 +47,7 @@ resource "azurerm_policy_assignment" "test" {
 
 resource "azurerm_resource_group" "test" {
   location = "northeurope"
-  name     = "test-policy-deny-windows-vm-policy-${random_string.suffix.result}"
+  name     = "rg-test-policy-deny-windows-vm-policy-${random_string.suffix.result}"
 }
 
 output "resource_group_name" {
