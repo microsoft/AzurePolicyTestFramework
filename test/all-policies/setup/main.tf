@@ -26,7 +26,7 @@ resource "random_string" "suffix" {
 resource "azurerm_policy_definition" "policy" {
   for_each = { for file in fileset(path.module, "../../../policy_definitions/*.json") : file => jsondecode(file(file)) }
 
-  name         = "${each.value.properties.name} ${random_string.suffix.result}"
+  name         = "${each.value.name} ${random_string.suffix.result}"
   policy_type  = each.value.properties.policyType
   mode         = each.value.properties.mode
   display_name = "${each.value.properties.displayName} ${random_string.suffix.result}"

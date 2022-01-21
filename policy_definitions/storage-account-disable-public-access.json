@@ -1,7 +1,6 @@
 {
+  "name": "Disable public access on Storage Account",
   "properties": {
-    "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "Disable public access on Storage Account",
     "displayName": "Disable public access on Storage Account",
     "policyType": "Custom",
     "mode": "All",

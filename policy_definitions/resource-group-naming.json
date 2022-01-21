@@ -1,7 +1,6 @@
 {
+  "name": "Enforce Resource Group naming convention",
   "properties": {
-    "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "Enforce Resource Group naming convention",
     "displayName": "Enforce Resource Group naming convention",
     "policyType": "Custom",
     "mode": "All",

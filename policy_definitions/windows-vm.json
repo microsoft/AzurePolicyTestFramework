@@ -1,7 +1,6 @@
 {
+  "name": "Prevent Windows VM deployment",
   "properties": {
-    "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "Prevent Windows VM deployment",
     "displayName": "Prevent Windows VM deployment",
     "policyType": "Custom",
     "mode": "All",

@@ -28,7 +28,7 @@ locals {
 }
 
 resource "azurerm_policy_definition" "policy" {
-  name         = "${local.file.properties.name} ${random_string.suffix.result}"
+  name         = "${local.file.name} ${random_string.suffix.result}"
   policy_type  = local.file.properties.policyType
   mode         = local.file.properties.mode
   display_name = "${local.file.properties.displayName} ${random_string.suffix.result}"

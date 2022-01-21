@@ -1,7 +1,6 @@
 {
+  "name": "Prevent from bad location",
   "properties": {
-    "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "Prevent from bad location",
     "displayName": "Prevent from bad location",
     "policyType": "Custom",
     "mode": "All",
