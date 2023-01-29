@@ -1,8 +1,52 @@
 cases:
-- name: test
+- name: test-deploy-if-not-exists
   setup:
-    path: example/foo
+    path: example/defaultSetup
+    variables:
+      name: "mypolicy"
+      location: "westeurope"
+      policy_rule_definition: "../../policy_definitions/vnet-deploy-subnet.rules.json"
+      policy_params_definition: "../../policy_definitions/vnet-deploy-subnet.params.json"
+      policy_params_values: |
+        {
+        "effect": {"value": "DeployIfNotExists"},
+        "subnetAddress": {"value": "10.0.1.0/24"}
+        }
   test:
     path: example/test
     variables:
-        address_space: ["10.0.0.0/16","192.168.0.0/16"]
+        address_space: ["10.0.0.0/16"]
+  after:
+    waitBeforeRunning: "1m"
+    path: example/after
+- name: test-deny
+  setup:
+    path: example/defaultSetup
+    variables:
+      name: "mypolicy"
+      location: "westeurope"
+      policy_rule_definition: "../../policy_definitions/vnet-deploy-subnet.rules.json"
+      policy_params_definition: "../../policy_definitions/vnet-deploy-subnet.params.json"
+      policy_params_values: |
+        {
+        "effect": {"value": "Deny"},
+        "subnetAddress": {"value": "10.0.1.0/24"}
+        }
+  test:
+    path: example/test
+    variables:
+        address_space: ["10.0.0.0/16"]
+    errorMessage: "mypolicy"
+# - name: test-policy-set-definition
+#   setup:
+#     path: example/policy-set
+#     variables:
+#       name: "test"
+#       location: "westeurope"
+#       policy_rule_definition: "../../policy_definitions/vnet-deploy-subnet.rules.json"
+#       policy_params_definition: "../../policy_definitions/vnet-deploy-subnet.params.json"
+#       policy_params_values: |
+#         {
+#         "effect": {"value": "DeployIfNotExists"},
+#         "subnetAddress": {"value": "10.0.1.0/24"}
+#         }

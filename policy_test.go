@@ -1,41 +1,53 @@
 package tester
 
 import (
-	"io/ioutil"
-	"log"
+	"fmt"
+	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 	"testing"
 
+	"github.com/ContainerSolutions/AzurePolicyTestFramework/pkg/runner"
 	"github.com/stretchr/testify/require"
 	"sigs.k8s.io/yaml"
 )
 
-const configPath = "test"
-
 func TestPolicies(t *testing.T) {
-	files, err := ioutil.ReadDir(configPath)
-	require.Nil(t, err)
-	for _, file := range files {
-		if filepath.Ext(file.Name()) == ".yaml" {
-			yamlFile, err := os.Open(filepath.Join(configPath, file.Name()))
+	configPath := os.Getenv("TEST_CONFIG_PATH")
+	if configPath == "" {
+		configPath = "./"
+	}
+	testPattern := os.Getenv("TEST_PATTERN")
+	if testPattern == "" {
+		testPattern = ".*"
+	}
+	re := regexp.MustCompile(testPattern)
+	walkFn := func(path string, info fs.FileInfo, err error) error {
+		if filepath.Ext(path) == ".yaml" {
+			yamlFile, err := os.Open(path)
 			if err != nil {
-				continue
+				return err
 			}
 
 			defer yamlFile.Close()
 
-			byteValue, _ := ioutil.ReadAll(yamlFile)
+			byteValue, _ := io.ReadAll(yamlFile)
 
-			var testConfig TestConfig
+			var testConfig runner.TestConfig
 			if err := yaml.Unmarshal(byteValue, &testConfig); err != nil {
-				log.Printf("Could not unmarshal file %s: %v", file.Name(), err)
-				continue
+				return fmt.Errorf("Could not unmarshal file %s: %w", path, err)
 			}
 			for _, tc := range testConfig.Cases {
-				testRunner := newTestRunner(tc)
-				t.Run(testRunner.testCase.Name, testRunner.Test)
+				testRunner := runner.NewTestRunner(tc)
+				if re.Match([]byte(testRunner.TestCase.Name)) {
+					t.Run(testRunner.TestCase.Name, testRunner.Test)
+				}
 			}
 		}
+		return nil
 	}
+	err := filepath.Walk(configPath, walkFn)
+	require.Nil(t, err)
 }

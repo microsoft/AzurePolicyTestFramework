@@ -29,3 +29,11 @@ resource "azurerm_virtual_network" "example" {
   location            = var.location
   address_space       = var.address_space
 }
+
+output "resource_group_name" {
+  value = var.resource_group_name
+}
+
+output "vnet_name" {
+  value = azurerm_virtual_network.example.name
+}

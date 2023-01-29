@@ -1,0 +1,56 @@
+{
+    "if": {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualNetworks"
+    },
+    "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "deployedByPolicy",
+            "evaluationDelay": "AfterProvisioning",
+            "roleDefinitionIds": [
+                "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "existenceCondition": {
+                "field": "Microsoft.Network/virtualNetworks/subnets[*].addressPrefix",
+                "equals": "[parameters('subnetAddress')]"
+            },
+            "deployment": {
+                "properties": {
+                    "mode": "incremental",
+                    "template": {
+                        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "addressSpace": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "resources": [
+                            {
+                                "name": "[concat(parameters('name'), '/deployedByPolicy')]",
+                                "type": "Microsoft.Network/virtualNetworks/subnets",
+                                "apiVersion": "2022-07-01",
+                                "properties": {
+                                    "addressPrefix": "[parameters('addressSpace')]"
+                                }
+                            }
+                        ]
+                    },
+                    "parameters": {
+                        "name": {
+                            "value": "[field('name')]"
+                        },
+                        "addressSpace": {
+                            "value": "[parameters('subnetAddress')]"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{      
+    "effect": {
+        "type": "String",
+        "metadata": {
+          "description": "Enable or disable or change the execution of this policy",
+          "displayName": "Effect"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "subnetAddress": {
+        "type": "String",
+        "metadata": {
+            "description": "Subnet Address to be created",
+            "displayName": "Subnet Address"
+        },
+        "defaultValue": "10.0.1.0/24"
+      }
+    }
