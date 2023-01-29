@@ -1,0 +1,8 @@
+cases:
+- name: test
+  setup:
+    path: example/foo
+  test:
+    path: example/test
+    variables:
+        address_space: ["10.0.0.0/16","192.168.0.0/16"]
