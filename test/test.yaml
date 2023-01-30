@@ -37,12 +37,9 @@ cases:
     variables:
         address_space: ["10.0.0.0/16"]
     errorMessage: "mypolicy"
-# - name: test-policy-set-definition
-#   setup:
-#     path: example/policy-set
-#     variables:
-#       module_name: "compute"
-#       management_group_id: "01230123012301230123012301230123"
+- name: test-policy-set-definition
+  setup:
+    path: example/policySet/setup/defaultSetup
 # - name: test-policy-module-and-policy
 #   setup:
 #     path: example/policy-set
