@@ -41,12 +41,16 @@ cases:
 #   setup:
 #     path: example/policy-set
 #     variables:
-#       name: "test"
-#       location: "westeurope"
-#       policy_rule_definition: "../../policy_definitions/vnet-deploy-subnet.rules.json"
-#       policy_params_definition: "../../policy_definitions/vnet-deploy-subnet.params.json"
-#       policy_params_values: |
-#         {
-#         "effect": {"value": "DeployIfNotExists"},
-#         "subnetAddress": {"value": "10.0.1.0/24"}
-#         }
+#       module_name: "compute"
+#       management_group_id: "01230123012301230123012301230123"
+# - name: test-policy-module-and-policy
+#   setup:
+#     path: example/policy-set
+#     variables:
+#       module_name: "vm"
+#   test:
+#     path: example/deploy-module
+#     variables:
+#       module_source: "git::https//gitlab.com/path/to/my/module?ref=v1.0.0"
+#     varFiles: 
+#     -  "path/to/module/test.tfvars"
