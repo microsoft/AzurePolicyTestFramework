@@ -1,5 +1,7 @@
 # Azure Policy Test Framework
 
+** Important note: this repository does not have CSS support **
+
 This repository is a command line tool for testing Azure Policies.
 
 ## Usage
