@@ -20,7 +20,7 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+        run: echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
       - name: "Build Changelog"
         id: changelog
