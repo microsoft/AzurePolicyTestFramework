@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@ed3a0531877aca392eb870f440d9ae7aba83a6bd # v1.4.0
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
     - name: Terraform fmt
       run: terraform fmt -check -recursive
     - name: Golang lint
-      uses: golangci/golangci-lint-action@v2
+      uses: golangci/golangci-lint-action@5c56cd6c9dc07901af25baab6f2b0d9f3b7c3018 # v2.5.2
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
@@ -30,12 +30,12 @@ jobs:
       security-events: write
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@231aa2c8a89117b126725a0e11897209b7118144 # v1.1.39
       with:
         languages: go
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+      uses: github/codeql-action/autobuild@231aa2c8a89117b126725a0e11897209b7118144 # v1.1.39
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@231aa2c8a89117b126725a0e11897209b7118144 # v1.1.39
