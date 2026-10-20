@@ -1,6 +1,6 @@
 module github.com/microsoft/AzurePolicyTestFramework
 
-go 1.17
+go 1.24
 
 require (
 	github.com/gruntwork-io/terratest v0.31.0
@@ -28,7 +28,7 @@ require (
 	github.com/hashicorp/terraform-json v0.13.0 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/jstemmer/go-junit-report v0.9.1 // indirect
-	github.com/klauspost/compress v1.11.2 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
